@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 /**
-* main - program to know if a number is positive or not
+* main - Entry point
+*Description:  program to know if a number is positive or not
 *Return : 0 (success)
 */
 int main(void)
