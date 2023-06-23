@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * print_diagonal - draws a diagonal
- * @n: number of \
+ * @n: number we gonna use
  */
 
 void print_diagonal(int n)
@@ -12,12 +12,10 @@ void print_diagonal(int n)
 	{
 		int i, j;
 
-		for (i = 0; i < n; i++)
+		for (i = 1; i <= n; i++)
 		{
-			for (j = 0; j < i; j++)
-			{
-					_putchar(' ');
-			}
+			for (j = 1; j <= i; j++)
+				_putchar(' ');
 			_putchar('\\');
 			_putchar('\n');
 		}
