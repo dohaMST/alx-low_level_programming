@@ -27,13 +27,13 @@ double square(double num)
 
 
 /**
- * main - Entry point
- * Return: 0
+ * largest_prime_factor - Entry point
+ * @num: the number we gonnq use
  */
 
-int main(void)
+void largest_prime_factor(long int num)
 {
-	long int p = -1, i, num = 612852475143;
+	long int p = -1, i;
 
 	while (num % 2 == 0)
 	{
@@ -52,5 +52,16 @@ int main(void)
 	if (num > 2)
 		p = num;
 	printf("%ld", p);
+}
+
+/**
+ * main - Entry point
+ * Return: 0
+ */
+
+int main(void)
+{
+	largest_prime_factor(612852475143);
 	return (0);
 }
+
