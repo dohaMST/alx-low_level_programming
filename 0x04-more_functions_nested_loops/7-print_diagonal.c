@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * print_diagonal - draws a diagonal
- * @n: number of "\"
+ * @n: number of \
  */
 
 void print_diagonal(int n)
