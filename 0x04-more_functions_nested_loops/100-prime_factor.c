@@ -51,7 +51,7 @@ void largest_prime_factor(long int num)
 	}
 	if (num > 2)
 		p = num;
-	printf("%ld", p);
+	printf("%ld\n", p);
 }
 
 /**
