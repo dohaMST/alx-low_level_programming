@@ -1,6 +1,31 @@
-#include <math.h>
 #include <stdio.h>
 #include "main.h"
+/**
+ * square - return square on a number
+ * @num: number we want its square
+ * Return: its square
+ */
+
+double square(double num)
+{
+	float s, t;
+
+	s = num / 2;
+
+	t = 0;
+
+	while (s != t)
+	{
+		t = s;
+		s = (num / t + t) / 2;
+	}
+	return (s);
+}
+
+
+
+
+
 /**
  * main - Entry point
  * Return: 0
@@ -16,7 +41,7 @@ int main(void)
 		num /= 2;
 	}
 
-	for (i = 3; i < sqrt(num); i += 2)
+	for (i = 3; i < square(num); i += 2)
 	{
 		while (num % i == 0)
 		{
