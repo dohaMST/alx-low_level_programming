@@ -9,20 +9,42 @@
 
 void print_buffer(char *b, int size)
 {
-	int debut, fin;
+	int a = 0, j, i;
 
-	if (size > 0)
-		for (debut = 0; debut < size; debut += 10)
-		{
-			if (size - debut < 10)
-				fin = size - debut;
-			else
-				fin = 10;
-			printf("%08x : ", debut);
-			printHexes(b, debut, fin);
-			printASCII(b, debut, fin);
-			printf("\n");
-		}
-	else
+	if (size <= 0)
+	{
 		printf("\n");
+		return (NULL);
+	}
+	while (a < size)
+	{
+		if (size - a < 10)
+			j = size - a;
+		else
+			j = 10;
+		printf("%08x: ", a);
+		for (i = 0; i < 10; i++)
+		{
+			if (i < j)
+				printf("%02x", *(b + i + a));
+			else
+				printf("  ");
+			if (i % 2)
+			{
+				printf(" ");
+			}
+		}
+		for (i = 0; i < j; i++)
+		{
+			int aide = *(b + a + i);
+
+			if (aide < 32 || aide > 132)
+			{
+				aide = '.';
+			}
+			printf("%c", aide);
+		}
+		printf("\n");
+		a += 10;
+	}
 }
