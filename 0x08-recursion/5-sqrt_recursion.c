@@ -26,8 +26,8 @@ int _help_recursion(int n, int a)
 
 int _sqrt_recursion(int n)
 {
-        if (n < 0)
-                return (-1);
-        else
-                return (_help_recursion(n, 0));
+	if (n < 0)
+		return (-1);
+	else
+		return (_help_recursion(n, 0));
 }
