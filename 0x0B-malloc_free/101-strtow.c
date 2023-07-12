@@ -1,76 +1,78 @@
-#include "main.h"
 #include <stdlib.h>
+#include "main.h"
+
 /**
- * wcount - count words
- * @str: the string we gonna use
+ * count_word - helper function to count the number of words in a string
+ * @s: string to evaluate
+ *
  * Return: number of words
  */
-
-int wcount(char *str)
+int count_word(char *s)
 {
-	int i, word = 0;
+	int flag, c, w;
 
-	for (i = 0; str[i]; i++)
+	flag = 0;
+	w = 0;
+
+	for (c = 0; s[c] != '\0'; c++)
 	{
-		if (str[i] == ' ')
+		if (s[c] == ' ')
+			flag = 0;
+		else if (flag == 0)
 		{
-			if (str[i + 1] != ' ' && str[i + 1] != '\0')
-				word++;
-		}
-		else if (i == 0)
-		{
-			word++;
+			flag = 1;
+			w++;
 		}
 	}
-	word++;
-	return (word);
+
+	return (w);
 }
-
 /**
- * strtow - a function that splits a string into words
- * @str: the string we gonaa use
- * Return: pointer to an array of strings or NULL
+ * **strtow - splits a string into words
+ * @str: string to split
+ *
+ * Return: pointer to an array of strings (Success)
+ * or NULL (Error)
  */
-
 char **strtow(char *str)
 {
-	int a = 0, b = 1, c, length, num = 0, count = 0;
-	char **arr;
+	char **matrix, *tmp;
+	int i, k = 0, len = 0, words, c = 0, start, end;
 
-	if (!str || *str == '\0')
+	while (*(str + len))
+		len++;
+	words = count_word(str);
+	if (words == 0)
 		return (NULL);
-	num = wcount(str);
-	if (num == 1)
+
+	matrix = (char **) malloc(sizeof(char *) * (words + 1));
+	if (matrix == NULL)
 		return (NULL);
-	arr = (char **) malloc(sizeof(char *) * num);
-	if (!arr)
-		return (NULL);
-	arr[num - 1] = NULL;
-	while (str[a])
+
+	for (i = 0; i <= len; i++)
 	{
-		if (str[a] != ' ' && (a == 0 || str[a - 1] == ' '))
+		if (str[i] == ' ' || str[i] == '\0')
 		{
-			while (str[a + b] != ' ' && str[a + b])
-				b++;
-			b++;
-			arr[count] = (char *) malloc(sizeof(char) * b);
-			b--;
-			if (arr[count] == NULL)
+			if (c)
 			{
-				for (c = 0; c < count; c++)
-					free(arr[c]);
-				free(arr[num - 1]);
-				free(arr);
-				return (NULL);
+				end = i;
+				tmp = (char *) malloc(sizeof(char) * (c + 1));
+				if (tmp == NULL)
+					return (NULL);
+				while (start < end)
+					*tmp++ = str[start++];
+				*tmp = '\0';
+				matrix[k] = tmp - c;
+				k++;
+				c = 0;
 			}
-			for (length = 0; length < b; length++)
-				arr[count][length] = str[a + length];
-			arr[count][length] = '\0';
-			count++;
-			a += b;
 		}
-		else
-		a++;
+		else if (c++ == 0)
+			start = i;
 	}
-	return (arr);
+
+	matrix[k] = NULL;
+
+	return (matrix);
 }
+
