@@ -12,6 +12,10 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	unsigned int l1 = 0, l2 = 0, lTotal, a = 0, b = 0;
 	char *string;
 
+	if (!s1)
+		s1 = "";
+	if (!s2)
+		s2 = "";
 	while (s1 && s1[l1])
 		l1++;
 	while (s2 && s2[l2])
