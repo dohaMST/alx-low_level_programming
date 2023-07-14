@@ -6,7 +6,7 @@
  * @string: the string we gonna use
  */
 
-void _string(char *string)
+void _string(const char *string)
 {
 	int a = 0;
 
