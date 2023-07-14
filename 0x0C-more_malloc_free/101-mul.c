@@ -33,7 +33,7 @@ int _length(char *str)
 {
 	int num = 0;
 
-	while (!str[num])
+	while (str[num] != '\0')
 	{
 		num++;
 	}
@@ -41,7 +41,7 @@ int _length(char *str)
 }
 
 /**
- * errors - handles errors for main
+ * errors - handles errors messages
  */
 void errors(void)
 {
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 	result = malloc(sizeof(int) * length);
 	if (!result)
 		return (1);
-	for (i = 0; i <= length1 + length2; i++)
+	for (i = 0; i <= length - 1; i++)
 		result[i] = 0;
 	for (length1 = length1 - 1; length1 >= 0; length1--)
 	{
@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 		if (mult > 0)
 			result[length1 + length2 + 1] += mult;
 	}
-	for (i = 0; i < length1 + length2; i++)
+	for (i = 0; i < length - 1; i++)
 	{
 		if (result[i])
 			a = 1;
@@ -98,4 +98,3 @@ int main(int argc, char *argv[])
 	free(result);
 	return (0);
 }
-
