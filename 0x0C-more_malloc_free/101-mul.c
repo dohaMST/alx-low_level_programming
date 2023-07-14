@@ -58,14 +58,15 @@ void errors(void)
 int main(int argc, char *argv[])
 {
 	char *str1, *str2;
-	int length1, length2, i, mult, num1, num2, *result, a = 0;
+	int length1, length2, i, mult, length, num1, num2, *result, a = 0;
 
 	str1 = argv[1], str2 = argv[2];
 	if (argc != 3 || !_number(str1) || !_number(str2))
 		errors();
 	length1 = _length(str1);
 	length2 = _length(str2);
-	result = malloc(sizeof(int) * (length1 + length2 + 1));
+	length = length1 + length2 + 1;
+	result = malloc(sizeof(int) * length);
 	if (!result)
 		return (1);
 	for (i = 0; i <= length1 + length2; i++)
