@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 		errors();
 	length1 = _length(str1);
 	length2 = _length(str2);
-	result = malloc(sizeof(int) * (length1 + length2 + 1);
+	result = malloc(sizeof(int) * (length1 + length2 + 1));
 	if (!result)
 		return (1);
 	for (i = 0; i <= length1 + length2; i++)
@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
 		if (mult > 0)
 			result[length1 + length2 + 1] += mult;
 	}
-	for (i = 0; i < length - 1; i++)
+	for (i = 0; i < length1 + length2; i++)
 	{
 		if (result[i])
 			a = 1;
