@@ -2,12 +2,14 @@
 #include <stdlib.h>
 
 /**
- *
+ * _string - prints a string
+ * @string: the string we gonna use
  */
 
 void _string(char *string)
 {
 	int a = 0;
+
 	while (string[a])
 	{
 		_putchar(string[a]);
@@ -16,13 +18,19 @@ void _string(char *string)
 }
 
 /**
+ * ecrire_num - prints a number
+ * @num: the number we gonna use
  *
  */
 void ecrire_num(unsigned long int num)
 {
-	unsigned long int div = 1, a, result;
+	unsigned long int div = 1, a = 0, result;
 
-	for (a = 0; num / div > 9; a++, div *= 10);
+	while (num / div > 9)
+	{
+		a++;
+		div *= 10;
+	}
 	for (; div >= 1; num %= div, div /= 10)
 	{
 		result = num / div;
@@ -31,7 +39,9 @@ void ecrire_num(unsigned long int num)
 }
 
 /**
- *
+ * _atoi - convert a string to number
+ * @s: the string we gonna use
+ * Return: number
  */
 
 int _atoi(char *s)
@@ -53,7 +63,10 @@ int _atoi(char *s)
 }
 
 /**
- *
+ * main - print multiplication
+ * @argc: size of array
+ * @argv: array of arguments
+ * Return: 0
  */
 
 int main(int argc, char *argv[])
