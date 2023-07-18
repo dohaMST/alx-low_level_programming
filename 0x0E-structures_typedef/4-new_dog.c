@@ -19,6 +19,7 @@ int _length(char *string)
  * _copypaste - to copy a string
  * @copy: first string
  * @dest: second string
+ * Return: the dest
  */
 
 void _copypaste(char *dest, char *copy)
@@ -47,8 +48,8 @@ dog_t *new_dog(char *name, float age, char *owner)
 	if (!d)
 		return (NULL);
 
-	size1 = _length(d->name);
-	size2 = _length(d->owner);
+	size1 = _length(name);
+	size2 = _length(owner);
 	d->name = malloc(sizeof(char) * (size1 + 1));
 	if (!d->name)
 	{
