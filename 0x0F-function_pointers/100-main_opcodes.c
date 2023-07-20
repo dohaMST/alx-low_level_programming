@@ -26,6 +26,14 @@ int main(int argc, char **argv)
 	}
 	f = (char *)main;
 	for (i = 0; i <	bytes; i++)
-		printf("%02hhx%s", f[i], i == bytes - 1 ? " " : "\n");
+	{
+		if (i == bytes - 1)
+		{
+			printf("%02hhx\n", f[i]);
+			break;
+		}
+		printf("%02hhx ", f[i]);
+	}
+
 	return (0);
 }
