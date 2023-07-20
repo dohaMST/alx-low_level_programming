@@ -27,4 +27,5 @@ int main(int argc, char **argv)
 	f = (char *)main;
 	for (i = 0; i <	bytes; i++)
 		printf("%02hhx%s", f[i], i == bytes - 1 ? " " : "\n");
+	return (0);
 }
