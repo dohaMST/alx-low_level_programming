@@ -9,12 +9,13 @@
 
 int create_file(const char *filename, char *text_content)
 {
-	int fl, bytes, size;
+	int fl;
+	ssize_t bytes, size;
 
 	if (!filename)
 		return (-1);
 
-	if (text_content)
+	if (text_content != NULL)
 	{
 		for (size = 0; text_content[size];)
 			size++;
