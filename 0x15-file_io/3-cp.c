@@ -1,75 +1,93 @@
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-void close_file(FILE *fp);
+char *c_buf(char *fileX);
+void c_file(int fileX);
 
 /**
- * close_file - Closes file pointers.
- * @fp: The file pointer to be closed.
+ * c_buf - a function that creates a new buffer.
+ * @fileX: the name of file
+ * Return: A pointer to the newly-allocated buffer.
  */
-void close_file(FILE *fp)
+char *c_buf(char *fileX)
 {
-	if (fclose(fp) == EOF)
+	char *buf;
+
+	buf = malloc(sizeof(char) * 1024);
+
+	if (!buf)
 	{
-		fprintf(stderr, "Error: Can't close file\n");
+		dprintf(STDERR_FILENO,
+			"Error: Can't write to %s\n", fileX);
+		exit(99);
+	}
+
+	return (buf);
+}
+
+/**
+ * c_file - a function that close a file
+ * @fileX: The name of the file
+ */
+void c_file(int fileX)
+{
+	int x;
+
+	x = close(fileX);
+	if (x == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fileX);
 		exit(100);
 	}
 }
 
 /**
  * main - Copies the contents of a file to another file.
- * @argc: The number of arguments supplied to the program.
- * @argv: An array of pointers to the arguments.
- *
- * Return: 0 on success.
- *
+ * @argc: The size of array of arguments
+ * @argv: An array of arguments.
+ * Return: 0
  * Description: If the argument count is incorrect - exit code 97.
- * If file_from does not exist or cannot be read - exit code 98.
- * If file_to cannot be created or written to - exit code 99.
- * If file_to or file_from cannot be closed - exit code 100.
+ * If file_f1 does not exist or cannot be read - exit code 98.
+ * If file_f2 cannot be created or written to - exit code 99.
+ * If file_f2 or file_f1 cannot be closed - exit code 100.
  */
 int main(int argc, char *argv[])
 {
-	FILE *from, *to;
-	char buffer[1024];
-	size_t r, w;
+	int from, to, lire, ecrire;
+	char *buf;
 
 	if (argc != 3)
 	{
-		fprintf(stderr, "Usage: cp file_from file_to\n");
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-
-	from = fopen(argv[1], "r");
-	if (from == NULL)
-	{
-		fprintf(stderr, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
-
-	to = fopen(argv[2], "w");
-	if (to == NULL)
-	{
-		fprintf(stderr, "Error: Can't write to %s\n", argv[2]);
-		close_file(from);
-		exit(99);
-	}
-
-	while ((r = fread(buffer, 1, sizeof(buffer), from)) > 0)
-	{
-		w = fwrite(buffer, 1, r, to);
-		if (w != r)
+	buf = c_buf(argv[2]);
+	from = open(argv[1], O_RDONLY);
+	lire = read(from, buf, 1024);
+	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	do {
+		if (from == -1 || lire == -1)
 		{
-			fprintf(stderr, "Error: Can't write to %s\n", argv[2]);
-			close_file(from);
-			close_file(to);
+			dprintf(STDERR_FILENO,
+				"Error: Can't read from file %s\n", argv[1]);
+			free(buf);
+			exit(98);
+		}
+		ecrire = write(to, buf, lire);
+		if (to == -1 || ecrire == -1)
+		{
+			dprintf(STDERR_FILENO,
+				"Error: Can't write to %s\n", argv[2]);
+			free(buf);
 			exit(99);
 		}
-	}
+		lire = read(from, buf, 1024);
+		to = open(argv[2], O_WRONLY | O_APPEND);
+	} while (lire > 0);
 
-	close_file(from);
-	close_file(to);
-
+	free(buf);
+	c_file(from);
+	c_file(to);
 	return (0);
 }
-
