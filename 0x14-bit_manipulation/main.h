@@ -3,7 +3,7 @@
 
 unsigned int binary_to_uint(const char *b);
 void print_binary(unsigned long int n);
-int put_char(char c);
+int _putchar(char c);
 
 
 #endif
