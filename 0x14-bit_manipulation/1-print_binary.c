@@ -15,12 +15,12 @@ void print_binary(unsigned long int n)
 		curr = n >> i;
 		if (curr & 1)
 		{
-			put_char('1');
+			_putchar('1');
 			x++;
 		}
 		else if (x)
-			put_char('0');
+			_putchar('0');
 	}
 	if (!x)
-		put_char('0');
+		_putchar('0');
 }
