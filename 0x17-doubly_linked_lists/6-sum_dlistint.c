@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * sum_dlistint - a function that returns the sum of all the elements 
+ * sum_dlistint - a function that returns the sum of all the elements
  * @head: the head of the list
  * Return: returns the sum of the elements
  */
