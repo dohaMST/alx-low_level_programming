@@ -8,11 +8,10 @@ void shash_table_print_rev(const shash_table_t *ht);
 void shash_table_delete(shash_table_t *ht);
 
 /**
- * shash_table_create - Creates a sorted hash table.
- * @size: The size of new sorted hash table.
+ * shash_table_create - a function that creates a hash table.
+ * @size: size of array
  *
- * Return: If an error occurs - NULL.
- *         Otherwise - a pointer to the new sorted hash table.
+ * Return: new hash table
  */
 shash_table_t *shash_table_create(unsigned long int size)
 {
