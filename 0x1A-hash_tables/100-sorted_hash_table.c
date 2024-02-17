@@ -143,23 +143,23 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 }
 
 /**
- * shash_table_print - Prints a sorted hash table in order.
- * @ht: A pointer to the sorted hash table.
+ * shash_table_print - a function that prints a hash table
+ * @ht: hash table
  */
 void shash_table_print(const shash_table_t *ht)
 {
-	shash_node_t *node;
+	shash_node_t *current;
 
 	if (ht == NULL)
 		return;
 
-	node = ht->shead;
+	current = ht->shead;
 	printf("{");
-	while (node != NULL)
+	while (current != NULL)
 	{
-		printf("'%s': '%s'", node->key, node->value);
-		node = node->snext;
-		if (node != NULL)
+		printf("'%s': '%s'", current->key, current->value);
+		current = current->snext;
+		if (current != NULL)
 			printf(", ");
 	}
 	printf("}\n");
